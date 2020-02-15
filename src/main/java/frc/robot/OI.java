@@ -8,41 +8,31 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.Drive;
-import frc.robot.commands.intakeMotor;
-import frc.robot.commands.intakeMotorReleased;
-import frc.robot.commands.outputMotor;
-import frc.robot.commands.outputMotorReleased;
-
+import frc.robot.commands.Drive; 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-
+  
   public static Joystick Stick = new Joystick(0);
+  //public static Joystick Stick = new Joystick(0);
   public static JoystickButton driveTrigger;
   public static JoystickButton driveThrottle;
-  // public static JoystickButton lowerIntakeInButton;
-  public static JoystickButton outputButton;
-  // public static JoystickButton upperIntakeInButton;
-  public static JoystickButton intakeButton;
 
-  public OI() {
+public OI()
+  {
+    Stick = new Joystick(0);
     driveTrigger = new JoystickButton(Stick, 1);
     driveThrottle = new JoystickButton(Stick, 2);
-    // lowerIntakeInButton = new JoystickButton(Stick, 5);
-    outputButton = new JoystickButton(Stick, 6);
-    // upperIntakeInButton = new JoystickButton(Stick, 7);
-    intakeButton = new JoystickButton(Stick, 5);
 
-    driveTrigger.whileHeld(new Drive());
+    //driveTrigger.whileHeld(new Drive()); 
+  }
 
-    outputButton.whileHeld(new outputMotor());
-    outputButton.whenReleased(new outputMotorReleased());
-    intakeButton.whileHeld(new intakeMotor());
-    intakeButton.whenReleased(new intakeMotorReleased());
+  public Joystick getJoystick() {
+    return Stick; 
   }
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a

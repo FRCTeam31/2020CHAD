@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Drive extends Command {
 
   boolean done = false;
-public Object differentialDrive;
   
 
 

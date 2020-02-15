@@ -14,10 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DriveSystem;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.intakeMotor;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.IntakeSystem;
-import frc.robot.subsystems.OutputSystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,8 +27,6 @@ public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI oi;
   public static DriveSystem dt; 
-  public static IntakeSystem im;
-  public static OutputSystem om;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -45,9 +40,7 @@ public class Robot extends TimedRobot {
     RobotMap.init();
     dt = new DriveSystem(); 
     oi = new OI();
-    im = new IntakeSystem();
-    om = new OutputSystem();
-    
+
     System.out.println("initialized OI");
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());

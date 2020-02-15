@@ -5,12 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class IntakeSystem extends Command {
-  public IntakeSystem() {
+public class intakeMotorPressed extends Command {
+  public intakeMotorPressed() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
