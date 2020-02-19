@@ -7,38 +7,58 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
+import edu.wpi.first.wpilibj.Counter; 
 
-public class IntakeSystem extends Command {
-  public IntakeSystem() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+/**
+ * Add your docs here.
+ */
+public class IntakeSystem extends Subsystem {
+  // Put methods for controlling this subsystem
+  // here. Call these from Commands.
+  DigitalInput input = RobotMap.input;
+
+  //Counter Counter = new Counter(input); 
+  
+  WPI_TalonFX intakeMotor = RobotMap.intakeMotor; 
+  
+  // public boolean isSwitchSet() {
+  //   return Counter.get() < 1; 
+  // }
+
+  // public void initializeCounter() {
+  //   Counter.reset();
+  // }
+
+  public void intakeMotorMove(){
+    intakeMotor.set(.4);
+    
+  }
+  public void intakeMoterStop(){
+    intakeMotor.set(0.0);
   }
 
-  // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  public void initDefaultCommand() {
+    // Set the default command for a subsystem here.
+    // setDefaultCommand(new MySpecialCommand());
   }
 
-  // Called repeatedly when this Command is scheduled to run
-  @Override
-  protected void execute() {
+  public void limitMotor() {
+    if(input.get() == true) {
+      System.out.println("Sensor"); 
+      intakeMotor.set(0.4);
+    }
+    else {
+        System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+
+      intakeMotor.set(0); 
+    }
   }
 
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    return false;
-  }
-
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
+  public void stopDrive() {
   }
 }

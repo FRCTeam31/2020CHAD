@@ -8,11 +8,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 
 public class outputMotorPressed extends Command {
+
+  boolean done = false; 
+
   public outputMotorPressed() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    requires(Robot.dt); 
   }
 
   // Called just before this Command runs the first time
@@ -23,12 +28,15 @@ public class outputMotorPressed extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    System.out.println("Command"); 
+    Robot.om.limitMotor();
+    //Robot.om.outputMotorMove();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return done;
   }
 
   // Called once after isFinished returns true

@@ -7,8 +7,11 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -20,14 +23,28 @@ public class OutputSystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  CANSparkMax  OutputMotor = new CANSparkMax(5, MotorType.kBrushless);
+  DigitalInput input = RobotMap.input;
+
+  CANSparkMax  outputMotor = RobotMap.outputMotor;
   
   public void outputMotorMove(){
-    OutputMotor.set(.4);
+    outputMotor.set(.4);
   }
 
   public void outputMotorStop() {
-    OutputMotor.set(0.0); 
+    outputMotor.set(0.0); 
+  }
+
+  public void limitMotor() {
+    if(input.get() == true) {
+      System.out.println("Sensor"); 
+      outputMotor.set(0.4);
+    }
+    else {
+        System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+
+      outputMotor.set(0); 
+    }
   }
 
   public void initDefaultCommand() {
