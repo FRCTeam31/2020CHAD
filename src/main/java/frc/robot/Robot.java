@@ -12,11 +12,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.CageSystem;
 import frc.robot.subsystems.DriveSystem;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.IntakeSystem;
-import frc.robot.subsystems.OutputSystem;
+// import frc.robot.subsystems.IntakeSystem;
+// import frc.robot.subsystems.OutputSystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -29,8 +30,9 @@ public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI oi;
   public static DriveSystem dt; 
-  public static IntakeSystem im;
-  public static OutputSystem om; 
+  // public static IntakeSystem im;
+  // public static OutputSystem om; 
+  public static CageSystem cs;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -44,8 +46,9 @@ public class Robot extends TimedRobot {
     RobotMap.init();
     dt = new DriveSystem(); 
     oi = new OI();
-    im = new IntakeSystem();
-    om = new OutputSystem();
+    // im = new IntakeSystem();
+    // om = new OutputSystem();
+    cs = new CageSystem(); 
 
     System.out.println("initialized OI");
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());

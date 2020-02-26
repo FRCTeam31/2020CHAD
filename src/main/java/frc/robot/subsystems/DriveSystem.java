@@ -26,24 +26,27 @@ public class DriveSystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  // WPI_TalonFX driveSystemRightFront = RobotMap.driveSystemRightFront;
-  // WPI_TalonFX driveSystemRightMiddle = RobotMap.driveSystemRightMiddle;
-  // WPI_TalonFX driveSystemRightRear = RobotMap.driveSystemRightRear;
-  // WPI_TalonFX driveSystemLeftFront = RobotMap.driveSystemLeftFront;
-  // WPI_TalonFX driveSystemLeftMiddle = RobotMap.driveSystemLeftMiddle;
-  // WPI_TalonFX driveSystemLeftRear = RobotMap.driveSystemLeftRear;
+  WPI_TalonFX driveSystemRightFront = RobotMap.driveSystemRightFront;
+  WPI_TalonFX driveSystemRightMiddle = RobotMap.driveSystemRightMiddle;
+  WPI_TalonFX driveSystemRightRear = RobotMap.driveSystemRightRear;
+  WPI_TalonFX driveSystemLeftFront = RobotMap.driveSystemLeftFront;
+  WPI_TalonFX driveSystemLeftMiddle = RobotMap.driveSystemLeftMiddle;
+  WPI_TalonFX driveSystemLeftRear = RobotMap.driveSystemLeftRear;
   // WPI_TalonSRX driveSystemRightFront = RobotMap.driveSystemRightFront;
   // // WPI_TalonSRX driveSystemRightMiddle = RobotMap.driveSystemRightMiddle;
   // // WPI_TalonSRX driveSystemRightRear = RobotMap.driveSystemRightRear;
   // // WPI_TalonSRX driveSystemLeftFront = RobotMap.driveSystemLeftFront;
   // // WPI_TalonSRX driveSystemLeftMiddle = RobotMap.driveSystemLeftMiddle;
   // // WPI_TalonSRX driveSystemLeftRear = RobotMap.driveSystemLeftRear;
-  // SpeedControllerGroup leftSide = new SpeedControllerGroup(driveSystemLeftFront, driveSystemLeftMiddle, driveSystemLeftRear);
-  // SpeedControllerGroup rightSide = new SpeedControllerGroup(driveSystemRightFront, driveSystemRightMiddle, driveSystemRightRear);
-  // public DifferentialDrive differentialDrive = new DifferentialDrive(leftSide, rightSide);
+  SpeedControllerGroup leftSide = new SpeedControllerGroup(driveSystemLeftFront, driveSystemLeftMiddle,
+      driveSystemLeftRear);
+  SpeedControllerGroup rightSide = new SpeedControllerGroup(driveSystemRightFront, driveSystemRightMiddle,
+      driveSystemRightRear);
+  public DifferentialDrive differentialDrive = new DifferentialDrive(leftSide, rightSide);
   Joystick Stick = new Joystick(0);
   int Ticks;
   public static Drive RD;
+
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new Drive());
@@ -55,21 +58,19 @@ public class DriveSystem extends Subsystem {
     setFollowers();
   }
 
-
   public void Driving() {
-    // if (OI.Stick.getRawAxis(3) > 0 ) {
-    //   RobotMap.differentialDrive.arcadeDrive(-OI.Stick.getRawAxis(3), -OI.Stick.getRawAxis(0) * 0.4);
-    //   System.out.println("*****************Z axis value is : " + OI.Stick.getRawAxis(0));
-    // }
-    // else if (OI.Stick.getRawAxis(2) > 0) {
-    //   RobotMap.differentialDrive.arcadeDrive(OI.Stick.getRawAxis(2), -OI.Stick.getRawAxis(0) * 0.4);
-    //   System.out.println("*****************Z axis value is : " + OI.Stick.getRawAxis(0));
-    // }
-    // else {
-    //   RobotMap.differentialDrive.arcadeDrive(0, -OI.Stick.getRawAxis(0) * 0.6);
-    //   System.out.println("*****************Z axis value is : " + OI.Stick.getRawAxis(0));
+    if (OI.Stick.getRawAxis(3) > 0) {
+      RobotMap.differentialDrive.arcadeDrive(-OI.Stick.getRawAxis(3), -OI.Stick.getRawAxis(0) * 0.4);
+      System.out.println("*****************Z axis value is : " + OI.Stick.getRawAxis(0));
+    } else if (OI.Stick.getRawAxis(2) > 0) {
+      RobotMap.differentialDrive.arcadeDrive(OI.Stick.getRawAxis(2), -OI.Stick.getRawAxis(0) * 0.4);
+      System.out.println("*****************Z axis value is : " + OI.Stick.getRawAxis(0));
+    } else {
+      RobotMap.differentialDrive.arcadeDrive(0, -OI.Stick.getRawAxis(0) * 0.6);
+      System.out.println("*****************Z axis value is : " + OI.Stick.getRawAxis(0));
 
-    // }
+    }
+  
   }
 
   public void enable() {
@@ -85,15 +86,15 @@ public class DriveSystem extends Subsystem {
 
 
   public void Reverse() {
-    // leftSide.setInverted(true);
-    // rightSide.setInverted(true);
+    leftSide.setInverted(true);
+    rightSide.setInverted(true);
   }
 
   public void setFollowers() {
-    // driveSystemLeftMiddle.follow(driveSystemLeftFront);
-    // driveSystemLeftRear.follow(driveSystemLeftFront);
-    // driveSystemRightMiddle.follow(driveSystemRightFront);
-    // driveSystemRightRear.follow(driveSystemRightFront);
+    driveSystemLeftMiddle.follow(driveSystemLeftFront);
+    driveSystemLeftRear.follow(driveSystemLeftFront);
+    driveSystemRightMiddle.follow(driveSystemRightFront);
+    driveSystemRightRear.follow(driveSystemRightFront);
   }
 
   /*public void configTalonsForManual() {

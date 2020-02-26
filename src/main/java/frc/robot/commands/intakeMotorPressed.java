@@ -1,58 +1,60 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+// /*----------------------------------------------------------------------------*/
+// /* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
+// /* Open Source Software - may be modified and shared by FRC teams. The code   */
+// /* must be accompanied by the FIRST BSD license file in the root directory of */
+// /* the project.                                                               */
+// /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+// package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+// import edu.wpi.first.wpilibj.command.Command;
 
-import frc.robot.Robot;
+// import frc.robot.Robot;
 
-public class intakeMotorPressed extends Command {
-  boolean done = false; 
+// public class intakeMotorPressed extends Command {
+//   boolean done = false; 
 
-  public intakeMotorPressed() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    requires(Robot.dt); 
-  }
+//   public intakeMotorPressed() {
+//     // Use requires() here to declare subsystem dependencies
+//     // eg. requires(chassis);
+//     requires(Robot.dt); 
+//   }
 
-  // Called just before this Command runs the first time
-  @Override
-  protected void initialize() {
-    // Robot.im.initializeCounter(); 
-    Robot.im.limitMotor();
-    }
+//   // Called just before this Command runs the first time
+//   @Override
+//   protected void initialize() {
+//     // Robot.im.initializeCounter(); 
+//     Robot.im.limitMotor();
+//     Robot.im.intakeMotorMove();
+//   }
 
-  // Called repeatedly when this Command is scheduled to run
-  @Override
-  protected void execute() {
-    System.out.println("Command"); 
-    Robot.im.limitMotor();
-   // Robot.im.intakeMotorMove();
+//   // Called repeatedly when this Command is scheduled to run
+//   @Override
+//   protected void execute() {
+//     System.out.println("Command"); 
+//     Robot.im.limitMotor();
+//     Robot.im.intakeMotorMove();
     
-  }
+//   }
 
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    return done;
-  }
+//   // Make this return true when this Command no longer needs to run execute()
+//   @Override
+//   protected boolean isFinished() {
+//     return done;
+//   }
 
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {
-    Robot.im.limitMotor();
+//   // Called once after isFinished returns true
+//   @Override
+//   protected void end() {
+//     Robot.im.limitMotor();
+//     Robot.im.intakeMotorMove();
 
-  }
+//   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-  }
+//   // Called when another command which requires one or more of the same
+//   // subsystems is scheduled to run
+//   @Override
+//   protected void interrupted() {
+//   }
 
-}
+// }
