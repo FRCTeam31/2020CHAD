@@ -10,14 +10,15 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.Drive;
-import frc.robot.commands.setCageHigh;
+//import frc.robot.commands.Drive;
+//import frc.robot.commands.setCageHigh;
 // import frc.robot.commands.intakeMotorPressed;
 // import frc.robot.commands.intakeMotorReleased;
 // import frc.robot.commands.outputMotorPressed;
 // import frc.robot.commands.outputMotorReleased;
-import frc.robot.commands.setCageLow;
-import frc.robot.commands.setCageMedium;
+// import frc.robot.commands.setCageLow;
+// import frc.robot.commands.setCageMedium;
+import frc.robot.commands.climber;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -25,45 +26,51 @@ import frc.robot.commands.setCageMedium;
  */
 public class OI {
   
-  public static Joystick Stick = new Joystick(0);
+  //public static Joystick Stick = new Joystick(0);
   public static Joystick Stick2 = new Joystick(1); 
-  public static JoystickButton driveTrigger;
-  public static JoystickButton driveThrottle;
-  public static JoystickButton intakeButton;
-  public static JoystickButton outputButton; 
-  public static JoystickButton cageMove; 
-  public static JoystickButton cageLow;
-  public static JoystickButton cageMedium;
-  public static JoystickButton cageHigh; 
+  // public static JoystickButton driveTrigger;
+  // public static JoystickButton driveThrottle;
+  // public static JoystickButton intakeButton;
+  // public static JoystickButton outputButton; 
+  // public static JoystickButton cageMove; 
+  // public static JoystickButton cageLow;
+  // public static JoystickButton cageMedium;
+  // public static JoystickButton cageHigh; 
+  public static JoystickButton climberButton; 
 
 public OI()
   {
-    Stick = new Joystick(0);
-    driveTrigger = new JoystickButton(Stick, 1);
-    driveThrottle = new JoystickButton(Stick, 2);
+    // Stick = new Joystick(0);
+      Stick2 = new Joystick(1); 
+    // driveTrigger = new JoystickButton(Stick, 1);
+    // driveThrottle = new JoystickButton(Stick, 2);
 
-    intakeButton = new JoystickButton(Stick, 6); 
-    outputButton = new JoystickButton(Stick, 5);
+    // intakeButton = new JoystickButton(Stick, 6); 
+    // outputButton = new JoystickButton(Stick, 5);
 
+    // cageLow = new JoystickButton(Stick2, 4);
+    // cageMedium = new JoystickButton(Stick2, 3);
+    // cageHigh = new JoystickButton(Stick2, 5); 
     
-    cageLow = new JoystickButton(Stick2, 6);
-    cageMedium = new JoystickButton(Stick2, 7);
-    cageHigh = new JoystickButton(Stick2, 8); 
+    climberButton = new JoystickButton(Stick2, 1); 
 
     // outputButton.whileHeld(new outputMotorPressed());
     // outputButton.whenReleased(new outputMotorReleased());
     // intakeButton.whileHeld(new intakeMotorPressed());
     // intakeButton.whenReleased(new intakeMotorReleased());
 
-    cageLow.whenPressed(new setCageLow());
-    cageMedium.whenPressed(new setCageMedium());
-    cageHigh.whenPressed(new setCageHigh());
+    // cageLow.whenPressed(new setCageLow());
+    // cageMedium.whenPressed(new setCageMedium());
+    // cageHigh.whenPressed(new setCageHigh());
 
-    //driveTrigger.whileHeld(new Drive()); 
+    climberButton.whileHeld(new climber());
+
+      //driveTrigger.whileHeld(new Drive()); 
   }
 
   public Joystick getJoystick() {
-    return Stick; 
+    // return Stick; 
+    return Stick2; 
   }
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
