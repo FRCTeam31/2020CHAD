@@ -5,18 +5,18 @@
 // /* the project.                                                               */
 // /*----------------------------------------------------------------------------*/
 
-// package frc.robot.commands.Color;
+// package frc.robot.commands.Drive;
 
-// import edu.wpi.first.wpilibj.command.Command;
 // import frc.robot.Robot;
+// import frc.robot.subsystems.DriveSystem;
+// import edu.wpi.first.wpilibj.command.Command;
 
-
-
-// public class moveToTargetColorCommand extends Command {
+// public class autonCommand extends Command {
 //   boolean done;
-//   public moveToTargetColorCommand() {
+//   public autonCommand() {
 //     // Use requires() here to declare subsystem dependencies
-//     // eg. requires(chassis);
+    
+//     requires(Robot.dt);
 //   }
 
 //   // Called just before this Command runs the first time
@@ -27,17 +27,15 @@
 //   // Called repeatedly when this Command is scheduled to run
 //   @Override
 //   protected void execute() {
-    
-//     Robot.cw.moveToTargetColor();
-//     isFinished();
+//     done =false;
+//     Robot.dt.auton();
+//     done = true;
 //   }
 
 //   // Make this return true when this Command no longer needs to run execute()
 //   @Override
 //   protected boolean isFinished() {
-    
-//     done = true;
-//     return done;
+//     return false;
 //   }
 
 //   // Called once after isFinished returns true

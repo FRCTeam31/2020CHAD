@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import frc.robot.commands.Drive.autonCommand;
 import frc.robot.subsystems.CageSystem;
 import frc.robot.subsystems.ClimbingSystem;
 import frc.robot.subsystems.ColorWheelSystem;
@@ -27,14 +28,14 @@ public class Robot extends TimedRobot {
 
   public static OI oi;
   public static DriveSystem dt;
-  public static ColorWheelSystem cw;
+ // public static ColorWheelSystem cw;
   public static OutputSystem om;
   public static IntakeSystem im;
 
   public static CageSystem cs;
   public static ClimbingSystem cls;
 
-  Command m_autonomousCommand;
+  //Command m_autonomousCommand = new autonCommand();
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   /**
@@ -45,7 +46,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     RobotMap.init();
     dt = new DriveSystem();
-    cw = new ColorWheelSystem();
+    //cw = new ColorWheelSystem();
     om = new OutputSystem();
     im = new IntakeSystem();
     cls = new ClimbingSystem();
@@ -104,7 +105,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
+    //m_autonomousCommand = m_chooser.getSelected();
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
@@ -114,9 +115,10 @@ public class Robot extends TimedRobot {
      */
 
     // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.start();
-    }
+  //   if (m_autonomousCommand != null) {
+  //     m_autonomousCommand.start();
+  //   }
+  //   else{System.out.println("  (  :");}
   }
 
   /**
@@ -133,10 +135,10 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-    }
-  }
+  //   if (m_autonomousCommand != null) {
+  //     m_autonomousCommand.cancel();
+  //   }
+   }
 
   /**
    * This function is called periodically during operator control.

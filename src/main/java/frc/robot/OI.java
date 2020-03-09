@@ -10,12 +10,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.commands.Color.ColorWheelMover;
+// import frc.robot.commands.Color.ColorWheelMover;
 import frc.robot.commands.Color.giveColor;
-import frc.robot.commands.Color.moveToTargetColorCommand;
-
-
-
+// import frc.robot.commands.Color.moveToTargetColorCommand;
 import frc.robot.commands.Drive.Drive;
 import frc.robot.commands.Cage.setCageHigh;
 import frc.robot.commands.Intake.intakeMotorPressed;
@@ -47,67 +44,46 @@ public class OI {
     public static JoystickButton climberButton; 
 
   public OI() {
+    // control /////////////////////////////////////////////
     Stick = new Joystick(0);
     Stick2 = new Joystick(1); 
 
+    // color wheel related stuff ///////////////////////////////////////
     giveColorButton = new JoystickButton(Stick, 4);
-    moveColorWheelButton = new JoystickButton(Stick2, 9);
-    moveToTargetColorButton = new JoystickButton(Stick2, 8);
+    // moveColorWheelButton = new JoystickButton(Stick2, 9);
+    // moveToTargetColorButton = new JoystickButton(Stick2, 8);
     
+
+    // ball related stuff //////////////////////////////
     intakeButton = new JoystickButton(Stick, 6); 
     outputButton = new JoystickButton(Stick, 5);
-
     cageLow = new JoystickButton(Stick2, 4);
     cageMedium = new JoystickButton(Stick2, 3);
     cageHigh = new JoystickButton(Stick2, 5); 
     
+
+    // climb related stuff /////////////////////////
     climberButton = new JoystickButton(Stick2, 1); 
 
+    // ball related stuff //////////////////////////////////////
     outputButton.whileHeld(new outputMotorPressed());
     outputButton.whenReleased(new outputMotorReleased());
     intakeButton.whileHeld(new intakeMotorPressed());
     intakeButton.whenReleased(new intakeMotorReleased());
-
     cageLow.whenPressed(new setCageLow());
     cageMedium.whenPressed(new setCageMedium());
     cageHigh.whenPressed(new setCageHigh());
 
+    //// climb related stuff /////////////////////////
     climberButton.whileHeld(new climber());
 
-      //driveTrigger.whileHeld(new Drive()); 
 
-   
-    giveColorButton.whenPressed(new giveColor());
-    moveColorWheelButton.whenPressed(new ColorWheelMover());
-    moveToTargetColorButton.whileHeld(new moveToTargetColorCommand());
+   // color wheel related stuff //////////////////////////////////////////////
+    // giveColorButton.whenPressed(new giveColor());
+    // moveColorWheelButton.whenPressed(new ColorWheelMover());
+    // moveToTargetColorButton.whileHeld(new moveToTargetColorCommand());
     
-    
+    // UNUSED ////////////////////////////
+    //driveTrigger.whileHeld(new Drive()); 
   }
-  //// CREATING BUTTONS
-  // One type of button is a joystick button which is any button on a
-  //// joystick.
-  // You create one by telling it which joystick it's on and which button
-  // number it is.
-  // Joystick stick = new Joystick(port);
-  // Button button = new JoystickButton(stick, buttonNumber);
-
-  // There are a few additional built in buttons you can use. Additionally,
-  // by subclassing Button you can create custom triggers and bind those to
-  // commands the same as any other Button.
-
-  //// TRIGGERING COMMANDS WITH BUTTONS
-  // Once you have a button, it's trivial to bind it to a button in one of
-  // three ways:
-
-  // Start the command when the button is pressed and let it run the command
-  // until it is finished as determined by it's isFinished method.
-  // button.whenPressed(new ExampleCommand());
-
-  // Run the command while the button is being held down and interrupt it once
-  // the button is released.
-  // button.whileHeld(new ExampleCommand());
-
-  // Start the command when the button is released and let it run the command
-  // until it is finished as determined by it's isFinished method.
-  // button.whenReleased(new ExampleCommand());
 }

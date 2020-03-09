@@ -10,9 +10,7 @@ package frc.robot.commands.Color;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-import com.revrobotics.ColorSensorV3;
 
-import edu.wpi.first.wpilibj.I2C;
 
 public class ColorWheelMover extends Command {
   boolean done;
@@ -30,7 +28,7 @@ public class ColorWheelMover extends Command {
   @Override
   protected void execute() {
     done = false;
-    Robot.cw.colorWheelRotate3Times();
+  //  Robot.cw.colorWheelRotate3Times();
     done = true;
   }
 

@@ -88,9 +88,9 @@ public class RobotMap {
     driveSystemLeftRear.configOpenloopRamp(0.1,0);*/
 
     input = new DigitalInput(0); 
-    limitSwitchLow = new DigitalInput(1);
-    limitSwitchMedium = new DigitalInput(3);
-    limitSwitchHigh = new DigitalInput(2); 
+    limitSwitchLow = new DigitalInput(4);
+    limitSwitchMedium = new DigitalInput(5);
+    limitSwitchHigh = new DigitalInput(6); 
     
     intakeMotor = new WPI_TalonFX(1); 
     outputMotor = new CANSparkMax(5, MotorType.kBrushless);
@@ -98,7 +98,7 @@ public class RobotMap {
     cageMotorMaster = new WPI_TalonFX(1);
     cageMotorFollow = new WPI_TalonSRX(6); 
 
-    climbMotor = new CANSparkMax(5, MotorType.kBrushless); 
+    climbMotor = new CANSparkMax(17, MotorType.kBrushless); 
 
     leftSide = new SpeedControllerGroup(driveSystemLeftFront, driveSystemLeftMiddle, driveSystemLeftRear);
     rightSide = new SpeedControllerGroup(driveSystemRightFront, driveSystemRightMiddle, driveSystemRightRear);

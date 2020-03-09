@@ -40,11 +40,11 @@ public class CageSystem extends Subsystem {
   public void setHigh() {
     setFollowers();
     limitSwitch = true;
-    while(limitSwitch == limitSwitchHigh.get()) {
-      System.out.println(limitSwitchHigh.get()); 
+    while(limitSwitchHigh.get()) {
+  //    System.out.println(limitSwitchHigh.get()); 
       cageMotorMaster.set(0.2);
-      if(limitSwitch == !limitSwitchHigh.get()) {
-        System.out.println(limitSwitchHigh.get()); 
+      if(!limitSwitchHigh.get()) {
+  //      System.out.println(limitSwitchHigh.get()); 
         cageMotorMaster.set(0); 
       }
     }
@@ -54,10 +54,10 @@ public class CageSystem extends Subsystem {
     setFollowers();
     limitSwitch = true;
     while(limitSwitch == limitSwitchLow.get()) {
-      System.out.println(limitSwitchLow.get()); 
+  //    System.out.println(limitSwitchLow.get()); 
       cageMotorMaster.set(-0.2);
       if(limitSwitch == !limitSwitchLow.get()) {
-        System.out.println(limitSwitchLow.get()); 
+  //      System.out.println(limitSwitchLow.get()); 
         cageMotorMaster.set(0); 
       }
     }
@@ -69,7 +69,7 @@ public class CageSystem extends Subsystem {
       while(limitSwitch == limitSwitchMedium.get()){
       cageMotorMaster.set(0.2);
       if(limitSwitch == !limitSwitchMedium.get()) {
-        System.out.println(limitSwitchMedium.get()); 
+  //      System.out.println(limitSwitchMedium.get()); 
         cageMotorMaster.set(0); 
         } 
       }
@@ -78,7 +78,7 @@ public class CageSystem extends Subsystem {
       while(limitSwitch == limitSwitchMedium.get()){
         cageMotorMaster.set(-0.2);
         if(limitSwitch == !limitSwitchMedium.get()) {
-          System.out.println(limitSwitchMedium.get()); 
+  //        System.out.println(limitSwitchMedium.get()); 
           cageMotorMaster.set(0); 
         } 
       }
