@@ -30,6 +30,7 @@ public class ClimbingSystem extends Subsystem {
   }
 
   public void upClimber(double upClimberPower) {
+  
     climbMotor.set(upClimberPower); 
   }
 

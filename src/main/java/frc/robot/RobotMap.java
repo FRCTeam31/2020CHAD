@@ -9,7 +9,8 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.subsystems.DriveSystem;
-
+import edu.wpi.first.wpilibj.AddressableLED;
+import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 //import frc.robot.subsystems.DriveSystem;
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -18,7 +19,9 @@ import frc.robot.subsystems.DriveSystem;
  * floating around.
  */
 public class RobotMap {
-
+ 
+  public static AddressableLEDBuffer ledbuffer;
+  public static String gameData = "";
   public static WPI_TalonFX driveSystemRightFront;
   public static WPI_TalonFX driveSystemRightMiddle;
   public static WPI_TalonFX driveSystemRightRear;
@@ -55,6 +58,7 @@ public class RobotMap {
 
   
   public static void init() {
+    ledbuffer = new AddressableLEDBuffer(25);
     driveSystemRightFront = new WPI_TalonFX(14);
     driveSystemRightFront.configOpenloopRamp(0.1, 0);
     driveSystemRightFront.setNeutralMode(NeutralMode.Brake);
@@ -107,5 +111,4 @@ public class RobotMap {
     differentialDrive.setSafetyEnabled(true);
     /*differentialDrive.setExpiration(0.1);
     differentialDrive.setMaxOutput(0.1);*/
-
     }}

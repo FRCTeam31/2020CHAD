@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.revrobotics.ColorSensorV3;
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -19,16 +20,15 @@ import com.revrobotics.ColorMatch;
 //import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
-
-
+import frc.robot.*;
 
 public class ColorWheelSystem extends Subsystem {
 
-  private boolean finished  = false;
+  private boolean finished = false;
+
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public ColorWheelSystem(){
+  public ColorWheelSystem() {
     super();
     colorMatcher.addColorMatch(blue);
     System.out.println("Constructor ||||||||||||||||||||||||||||||||||||||||");
@@ -36,8 +36,10 @@ public class ColorWheelSystem extends Subsystem {
     colorMatcher.addColorMatch(red);
     colorMatcher.addColorMatch(yellow);
     encoder = funny.getEncoder();
+    funny.setIdleMode(IdleMode.kBrake);
 
   }
+
   @Override
   public void initDefaultCommand() {
   }
@@ -46,23 +48,21 @@ public class ColorWheelSystem extends Subsystem {
   private final ColorSensorV3 colorSensor = new ColorSensorV3(i2cPort);
   private final ColorMatch colorMatcher = new ColorMatch();
   private final CANEncoder encoder;
- // private final Color blue = ColorMatch.makeColor(0.143, 0.427, 0.429);
- //3400  ,11498 ,11119
+  // private final Color blue = ColorMatch.makeColor(0.143, 0.427, 0.429);
+  // 3400 ,11498 ,11119
 
- //blue is : 0.130615234375  ,0.44189453125 ,0.42724609375 
- // green is: GB 0.17724609375  ,0.61376953125 ,0.208984375 ﻿
-//red is: 0.5546875  ,0.328369140625 ,0.116943359375 ﻿
-//yellow is: RGB 0.323974609375  ,0.572265625 ,0.103759765625 
- private final Color blue = ColorMatch.makeColor(0.130, 0.442, 0.420);
+  // blue is : 0.130615234375 ,0.44189453125 ,0.42724609375
+  // green is: GB 0.17724609375 ,0.61376953125 ,0.208984375 ﻿
+  // red is: 0.5546875 ,0.328369140625 ,0.116943359375 ﻿
+  // yellow is: RGB 0.323974609375 ,0.572265625 ,0.103759765625
+  private final Color blue = ColorMatch.makeColor(0.130, 0.442, 0.420);
   private final Color green = ColorMatch.makeColor(0.177, 0.613, 0.208);
   private final Color red = ColorMatch.makeColor(0.551, 0.328, 0.114);
   private final Color yellow = ColorMatch.makeColor(0.323, 0.572, 0.103);
-  
 
   double counter = 0;
   boolean isFinished = false;
   int bogusCounter = 0;
-
 
   public String giveColor() {
     finished = false;
@@ -71,7 +71,6 @@ public class ColorWheelSystem extends Subsystem {
     String colorResponse;
     ColorMatchResult match = colorMatcher.matchClosestColor(colorInput);
 
-    
     if (match.color == blue) {
 
       colorResponse = "BLUE";
@@ -84,27 +83,28 @@ public class ColorWheelSystem extends Subsystem {
     } else {
       colorResponse = " ";
     }
-  
+
     // System.out.println(bogusCounter);
-   // System.out.println(colorResponse);
-     //System.out.println("RGB " + colorInput.red + "  ," +colorInput.green + " ," + colorInput.blue);
+    // System.out.println(colorResponse);
+    // System.out.println("RGB " + colorInput.red + " ," +colorInput.green + " ," +
+    // colorInput.blue);
     // System.out.println("Color Input " + colorInput.toString());
     SmartDashboard.putString("ViewedColor", colorResponse);
-   // SmartDashboard.updateValues();
+    // SmartDashboard.updateValues();
     finished = true;
     return colorResponse;
   }
 
   private final CANSparkMax funny = new CANSparkMax(4, MotorType.kBrushless);
-  //private final WPI_TalonFX a = new WPI_TalonFX(7);
+  // private final WPI_TalonFX a = new WPI_TalonFX(7);
 
   public void colorWheelRotate3Times() {
     encoder.setPosition(0);
-      while(encoder.getPosition() < 4*7.71741943359){
-        System.out.println(encoder.getPosition());
-        funny.set(0.06);
-     }
-     funny.set(0);
+    while (encoder.getPosition() < 4 * 7.71741943359) {
+      System.out.println(encoder.getPosition());
+      funny.set(0.06);
+    }
+    funny.set(0);
   }
 
   public void colorWheelMover() {
@@ -113,26 +113,23 @@ public class ColorWheelSystem extends Subsystem {
 
   public void moveToTargetColor() {
     giveColor();
-    funny.setIdleMode(IdleMode.kBrake);
-    String targetColor;
-    String gameData;
-    gameData = DriverStation.getInstance().getGameSpecificMessage();
-    if (gameData.length() > 0) {
-      switch (gameData.charAt(0)) {
+    String targetColor = null;
+    if (RobotMap.gameData.length() > 0 && targetColor == null) {
+      switch (RobotMap.gameData.charAt(0)) {
       case 'B':
-        targetColor = "BLUE";
+        targetColor = "RED";
         break;
       case 'G':
-        targetColor = "GREEN";
-        break;
-      case 'R':
-        targetColor = "RED";
-        break;
-      case 'Y':
         targetColor = "YELLOW";
         break;
+      case 'R':
+        targetColor = "BLUE";
+        break;
+      case 'Y':
+        targetColor = "GREEN";
+        break;
       default:
-        targetColor = "RED";
+        targetColor = "BLUE";
         break;
       }
       switch (targetColor) {
@@ -140,45 +137,45 @@ public class ColorWheelSystem extends Subsystem {
         while (giveColor() != targetColor) {
           funny.set(0.06);
         }
-        for(int i = 0; i < 77; i++){
-        //  System.out.println("current color is " + giveColor());
+        for (int i = 0; i < 77; i++) {
+          // System.out.println("current color is " + giveColor());
           funny.set(0.06);
         }
-      break;
+        break;
       case "GREEN":
         while (giveColor() != targetColor) {
           // System.out.println("target color is " + targetColor);
           // System.out.println("current color is " + giveColor());
           funny.set(0.06);
         }
-        for(int i = 0; i <75; i++){
+        for (int i = 0; i < 75; i++) {
           funny.set(0.06);
-         // System.out.println("current color is " + giveColor());        
+          // System.out.println("current color is " + giveColor());
         }
-      break;
+        break;
       case "RED":
-      while (giveColor() != targetColor) {
-        // System.out.println("target color is " + targetColor);
-        // System.out.println("current color is " + giveColor());
-        funny.set(0.06);
+        while (giveColor() != targetColor) {
+          // System.out.println("target color is " + targetColor);
+          // System.out.println("current color is " + giveColor());
+          funny.set(0.06);
+        }
+        for (int i = 0; i < 75; i++) {
+          funny.set(0.06);
+          // System.out.println("current color is " + giveColor());
+        }
+        break;
+      case "BLUE":
+        while (giveColor() != targetColor) {
+          // System.out.println("target color is " + targetColor);
+          // System.out.println("current color is " + giveColor());
+          funny.set(0.06);
+        }
+        for (int i = 0; i < 75; i++) {
+          funny.set(0.06);
+          // System.out.println("============================================================");
+        }
+        break;
       }
-      for(int i = 0; i <75; i++){
-        funny.set(0.06);
-        //System.out.println("current color is " + giveColor());      
-      }
-    break;
-    case "BLUE":
-      while (giveColor() != targetColor) {
-        // System.out.println("target color is " + targetColor);
-        // System.out.println("current color is " + giveColor());
-        funny.set(0.06);
-      }
-      for(int i = 0; i <75; i++){
-        funny.set(0.06);
-       // System.out.println("============================================================");
-      }
-    break;
-    }
       while (giveColor() != targetColor) {
         funny.set(0.06);
       }
@@ -201,6 +198,6 @@ public class ColorWheelSystem extends Subsystem {
   }
 
   // public void setFinished(boolean finished) {
-  //   this.finished = finished;
+  // this.finished = finished;
   // }
 }

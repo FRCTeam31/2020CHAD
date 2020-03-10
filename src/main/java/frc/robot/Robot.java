@@ -5,7 +5,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-//import frc.robot.commands.Drive.autonCommand;
+import frc.robot.commands.AutonCommand;
+import frc.robot.commands.LEDSetColor;
 import frc.robot.subsystems.CageSystem;
 import frc.robot.subsystems.ClimbingSystem;
 import frc.robot.subsystems.ColorWheelSystem;
@@ -15,7 +16,14 @@ import frc.robot.subsystems.ColorWheelSystem;
 //import frc.robot.subsystems.climbSystem;
 import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.IntakeSystem;
+import frc.robot.subsystems.LEDSubsystem;
 import frc.robot.subsystems.OutputSystem;
+import frc.robot.RobotMap;
+import edu.wpi.first.cameraserver.CameraServer;
+
+import edu.wpi.first.wpilibj.AddressableLED;
+import edu.wpi.first.wpilibj.AddressableLEDBuffer;
+import edu.wpi.first.wpilibj.DriverStation;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,6 +36,7 @@ public class Robot extends TimedRobot {
 
   public static OI oi;
   public static DriveSystem dt;
+  public static LEDSubsystem lc;
  // public static ColorWheelSystem cw;
   public static OutputSystem om;
   public static IntakeSystem im;
@@ -35,8 +44,8 @@ public class Robot extends TimedRobot {
   public static CageSystem cs;
   public static ClimbingSystem cls;
 
-  //Command m_autonomousCommand = new autonCommand();
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
+  public static Command m_autonomousCommand = new AutonCommand();
+  public static SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -47,11 +56,14 @@ public class Robot extends TimedRobot {
     RobotMap.init();
     dt = new DriveSystem();
     //cw = new ColorWheelSystem();
+    lc = new LEDSubsystem();
     om = new OutputSystem();
     im = new IntakeSystem();
     cls = new ClimbingSystem();
     cs = new CageSystem(); 
     oi = new OI();
+
+    CameraServer.getInstance().startAutomaticCapture();
 
     SmartDashboard.putBoolean("Red Select", false);
     SmartDashboard.putBoolean("Green Select", false);
@@ -60,7 +72,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.updateValues();
     System.out.println("initialized OI");
 
-    // chooser.addOption("My Auto", new MyAutoCommand());
+    m_chooser.addOption("My Auto", new AutonCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
   }
 
@@ -105,7 +117,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    //m_autonomousCommand = m_chooser.getSelected();
+    m_autonomousCommand = m_chooser.getSelected();
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
@@ -115,10 +127,11 @@ public class Robot extends TimedRobot {
      */
 
     // schedule the autonomous command (example)
-  //   if (m_autonomousCommand != null) {
-  //     m_autonomousCommand.start();
-  //   }
-  //   else{System.out.println("  (  :");}
+    if (m_autonomousCommand != null) {
+      m_autonomousCommand.start();
+      System.out.println("auton started");
+    }
+    else{System.out.println("  (  :");}
   }
 
   /**
@@ -135,9 +148,11 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-  //   if (m_autonomousCommand != null) {
-  //     m_autonomousCommand.cancel();
-  //   }
+    if (m_autonomousCommand != null) {
+      m_autonomousCommand.cancel();
+      RobotMap.gameData = DriverStation.getInstance().getGameSpecificMessage();
+
+    }
    }
 
   /**
@@ -146,6 +161,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    if(RobotMap.input.get()){
+      System.out.println(RobotMap.input.get());
+    }
   }
 
   /**

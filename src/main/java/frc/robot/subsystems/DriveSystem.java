@@ -93,15 +93,15 @@ public class DriveSystem extends Subsystem {
     driveSystemRightRear.follow(driveSystemRightFront);
   }
 
-//   public void configTalonsForManual() {
-//     driveSystemLeftFront.changeControlMode(WPI_TalonSRX.SetControlMode(kFollower).PercentvBus);
-//   }
-  // public void auton(){
-  //   for(int q = 0; q < 100; q++){
-  //     leftSide.set(0.2);
-  //     rightSide.set(0.2);
-  //   }
-  //   leftSide.set(0);
-  //   rightSide.set(0);
-  // }
+  // public void configTalonsForManual() {
+  //   driveSystemLeftFront.changeControlMode(WPI_TalonSRX.SetControlMode(kFollower).PercentvBus);
+  //}
+  public void auton(){
+    for(int q = 0; q < 100; q++){
+      leftSide.set(0.2);
+      rightSide.set(0.2);
+    }
+    leftSide.set(0);
+    rightSide.set(0);
+  }
 }
