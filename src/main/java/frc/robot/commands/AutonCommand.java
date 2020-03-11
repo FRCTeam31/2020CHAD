@@ -1,51 +1,50 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+// /*----------------------------------------------------------------------------*/
+// /* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
+// /* Open Source Software - may be modified and shared by FRC teams. The code   */
+// /* must be accompanied by the FIRST BSD license file in the root directory of */
+// /* the project.                                                               */
+// /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+// package frc.robot.commands;
 
-import frc.robot.Robot;
-import frc.robot.subsystems.DriveSystem;
-import edu.wpi.first.wpilibj.command.Command;
+// import edu.wpi.first.wpilibj.command.Command;
+// import frc.robot.Robot;
 
-public class AutonCommand extends Command {
-  boolean done;
-  public AutonCommand() {
-    // Use requires() here to declare subsystem dependencies
-    
-    requires(Robot.dt);
-  }
+// public class AutonCommand extends Command {
+  
 
-  // Called just before this Command runs the first time
-  @Override
-  protected void initialize() {
-  }
+//   public AutonCommand() {
+//     // Use requires() here to declare subsystem dependencies
+//     // eg. requires(chassis);
+//     requires(Robot.dt);
+//   }
 
-  // Called repeatedly when this Command is scheduled to run
-  @Override
-  protected void execute() {
-    done =false;
-    Robot.dt.auton();
-    done = true;
-  }
+//   // Called just before this Command runs the first time
+//   @Override
+//   protected void initialize() {
+//   }
 
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    return done;
-  }
+//   // Called repeatedly when this Command is scheduled to run
+//   @Override
+//   protected void execute() {
+//     Robot.dt.auton(); 
+  
+//   }
 
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {
-  }
+//   // Make this return true when this Command no longer needs to run execute()
+//   @Override
+//   protected boolean isFinished() {
+//   return false;   
+//   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-  }
-}
+//   // Called once after isFinished returns true
+//   @Override
+//   protected void end() {
+//   }
+
+//   // Called when another command which requires one or more of the same
+//   // subsystems is scheduled to run
+//   @Override
+//   protected void interrupted() {
+//   }
+// }

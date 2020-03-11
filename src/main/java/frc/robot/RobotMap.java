@@ -9,8 +9,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.subsystems.DriveSystem;
-import edu.wpi.first.wpilibj.AddressableLED;
-import edu.wpi.first.wpilibj.AddressableLEDBuffer;
+
 //import frc.robot.subsystems.DriveSystem;
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -19,9 +18,7 @@ import edu.wpi.first.wpilibj.AddressableLEDBuffer;
  * floating around.
  */
 public class RobotMap {
- 
-  public static AddressableLEDBuffer ledbuffer;
-  public static String gameData = "";
+
   public static WPI_TalonFX driveSystemRightFront;
   public static WPI_TalonFX driveSystemRightMiddle;
   public static WPI_TalonFX driveSystemRightRear;
@@ -29,7 +26,7 @@ public class RobotMap {
   public static WPI_TalonFX driveSystemLeftMiddle;
   public static WPI_TalonFX driveSystemLeftRear;
 
-  public static WPI_TalonFX cageMotorMaster; 
+  public static WPI_TalonSRX cageMotorMaster; 
   public static WPI_TalonSRX cageMotorFollow; 
 
   /*public static WPI_TalonSRX driveSystemRightFront;
@@ -39,12 +36,18 @@ public class RobotMap {
   public static WPI_TalonSRX driveSystemLeftMiddle;
   public static WPI_TalonSRX driveSystemLeftRear;*/
 
-  public static WPI_TalonFX intakeMotor;
-  public static CANSparkMax outputMotor; 
+  public static WPI_TalonSRX lowMotor;
+  public static WPI_TalonSRX highMotor; 
 
   public static CANSparkMax climbMotor; 
 
-  public static DigitalInput input; 
+  public static DigitalInput input1;
+  public static DigitalInput input2;
+  public static DigitalInput input3;
+  // public static DigitalInput input4;
+  // public static DigitalInput input5;
+    public static DigitalInput input6; 
+   
   public static DigitalInput limitSwitchLow;
   public static DigitalInput limitSwitchMedium;
   public static DigitalInput limitSwitchHigh; 
@@ -58,7 +61,6 @@ public class RobotMap {
 
   
   public static void init() {
-    ledbuffer = new AddressableLEDBuffer(25);
     driveSystemRightFront = new WPI_TalonFX(14);
     driveSystemRightFront.configOpenloopRamp(0.1, 0);
     driveSystemRightFront.setNeutralMode(NeutralMode.Brake);
@@ -91,18 +93,24 @@ public class RobotMap {
     driveSystemLeftRear = new WPI_TalonSRX(7);
     driveSystemLeftRear.configOpenloopRamp(0.1,0);*/
 
-    input = new DigitalInput(0); 
+    input1 = new DigitalInput(1); 
+    input2 = new DigitalInput(2); 
+    input3 = new DigitalInput(3); 
+    // input4 = new DigitalInput(3); 
+    // input5 = new DigitalInput(4); 
+      input6 = new DigitalInput(0); 
+
     limitSwitchLow = new DigitalInput(4);
     limitSwitchMedium = new DigitalInput(5);
     limitSwitchHigh = new DigitalInput(6); 
     
-    intakeMotor = new WPI_TalonFX(1); 
-    outputMotor = new CANSparkMax(5, MotorType.kBrushless);
+    lowMotor = new WPI_TalonSRX(2); 
+    highMotor = new WPI_TalonSRX(4);
 
-    cageMotorMaster = new WPI_TalonFX(1);
-    cageMotorFollow = new WPI_TalonSRX(6); 
+    cageMotorMaster = new WPI_TalonSRX(9);
+    cageMotorFollow = new WPI_TalonSRX(10); 
 
-    climbMotor = new CANSparkMax(17, MotorType.kBrushless); 
+    climbMotor = new CANSparkMax(17, MotorType.kBrushless);
 
     leftSide = new SpeedControllerGroup(driveSystemLeftFront, driveSystemLeftMiddle, driveSystemLeftRear);
     rightSide = new SpeedControllerGroup(driveSystemRightFront, driveSystemRightMiddle, driveSystemRightRear);
@@ -111,4 +119,5 @@ public class RobotMap {
     differentialDrive.setSafetyEnabled(true);
     /*differentialDrive.setExpiration(0.1);
     differentialDrive.setMaxOutput(0.1);*/
+
     }}

@@ -1,29 +1,26 @@
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.AutonCommand;
-import frc.robot.commands.LEDSetColor;
+// import frc.robot.commands.AutonCommand;
 import frc.robot.subsystems.CageSystem;
+// import frc.robot.subsystems.CageSystem;
 import frc.robot.subsystems.ClimbingSystem;
-import frc.robot.subsystems.ColorWheelSystem;
-//import frc.robot.subsystems.DriveSystem;
+// import frc.robot.subsystems.ColorWheelSystem;
+import frc.robot.subsystems.DriveSystem;
 // import frc.robot.subsystems.IntakeSystem;
 // import frc.robot.subsystems.OutputSystem; 
 //import frc.robot.subsystems.climbSystem;
-import frc.robot.subsystems.DriveSystem;
+// import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.IntakeSystem;
-import frc.robot.subsystems.LEDSubsystem;
 import frc.robot.subsystems.OutputSystem;
-import frc.robot.RobotMap;
-import edu.wpi.first.cameraserver.CameraServer;
-
-import edu.wpi.first.wpilibj.AddressableLED;
-import edu.wpi.first.wpilibj.AddressableLEDBuffer;
-import edu.wpi.first.wpilibj.DriverStation;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -36,15 +33,25 @@ public class Robot extends TimedRobot {
 
   public static OI oi;
   public static DriveSystem dt;
-  public static LEDSubsystem lc;
- // public static ColorWheelSystem cw;
+  // public static ColorWheelSystem cw;
   public static OutputSystem om;
   public static IntakeSystem im;
-
   public static CageSystem cs;
   public static ClimbingSystem cls;
 
-  public static Command m_autonomousCommand = new AutonCommand();
+  WPI_TalonFX driveSystemRightFront = RobotMap.driveSystemRightFront;
+  WPI_TalonFX driveSystemRightMiddle = RobotMap.driveSystemRightMiddle;
+  WPI_TalonFX driveSystemRightRear = RobotMap.driveSystemRightRear;
+  WPI_TalonFX driveSystemLeftFront = RobotMap.driveSystemLeftFront;
+  WPI_TalonFX driveSystemLeftMiddle = RobotMap.driveSystemLeftMiddle;
+  WPI_TalonFX driveSystemLeftRear = RobotMap.driveSystemLeftRear;
+ 
+  SpeedControllerGroup leftSide = new SpeedControllerGroup(driveSystemLeftFront, driveSystemLeftMiddle,
+      driveSystemLeftRear);
+  SpeedControllerGroup rightSide = new SpeedControllerGroup(driveSystemRightFront, driveSystemRightMiddle,
+      driveSystemRightRear);
+  //Command m_autonomousCommand;
+  //public static Command m_autonomousCommand = new AutonCommand(); 
   public static SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   /**
@@ -54,16 +61,13 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     RobotMap.init();
-    dt = new DriveSystem();
-    //cw = new ColorWheelSystem();
-    lc = new LEDSubsystem();
+     dt = new DriveSystem();
+    // cw = new ColorWheelSystem();
     om = new OutputSystem();
     im = new IntakeSystem();
-    cls = new ClimbingSystem();
-    cs = new CageSystem(); 
+   cls = new ClimbingSystem();
+   cs = new CageSystem(); 
     oi = new OI();
-
-    CameraServer.getInstance().startAutomaticCapture();
 
     SmartDashboard.putBoolean("Red Select", false);
     SmartDashboard.putBoolean("Green Select", false);
@@ -72,7 +76,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.updateValues();
     System.out.println("initialized OI");
 
-    m_chooser.addOption("My Auto", new AutonCommand());
+    // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
   }
 
@@ -117,7 +121,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
+    //m_autonomousCommand = m_chooser.getSelected();
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
@@ -127,11 +131,9 @@ public class Robot extends TimedRobot {
      */
 
     // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.start();
-      System.out.println("auton started");
-    }
-    else{System.out.println("  (  :");}
+    // if (m_autonomousCommand != null) {
+    //   m_autonomousCommand.start();
+    //}
   }
 
   /**
@@ -139,6 +141,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    double time = Timer.getFPGATimestamp(); 
+    if(time < 3) {
+      leftSide.set(0.6);
+      rightSide.set(0.6); 
+    }
     Scheduler.getInstance().run();
   }
 
@@ -148,12 +155,10 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-      RobotMap.gameData = DriverStation.getInstance().getGameSpecificMessage();
-
-    }
-   }
+  //   if (m_autonomousCommand != null) {
+  //     m_autonomousCommand.cancel();
+  //   }
+  }
 
   /**
    * This function is called periodically during operator control.
@@ -161,9 +166,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    if(RobotMap.input.get()){
-      System.out.println(RobotMap.input.get());
-    }
+    
   }
 
   /**

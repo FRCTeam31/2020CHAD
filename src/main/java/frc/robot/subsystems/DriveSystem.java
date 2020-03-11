@@ -58,14 +58,11 @@ public class DriveSystem extends Subsystem {
 
   public void Driving() {
     if (OI.Stick.getRawAxis(3) > 0) {
-      RobotMap.differentialDrive.arcadeDrive(-OI.Stick.getRawAxis(3)*0.4, -OI.Stick.getRawAxis(0) * 0.4);
-//System.out.println("*****************Z axis value is : " + OI.Stick.getRawAxis(0));
+      RobotMap.differentialDrive.arcadeDrive(-OI.Stick.getRawAxis(3), -OI.Stick.getRawAxis(0) * 0.4);
     } else if (OI.Stick.getRawAxis(2) > 0) {
-      RobotMap.differentialDrive.arcadeDrive(OI.Stick.getRawAxis(2)*0.4, -OI.Stick.getRawAxis(0) * 0.4);
-      //System.out.println("*****************Z axis value is : " + OI.Stick.getRawAxis(0));
+      RobotMap.differentialDrive.arcadeDrive(OI.Stick.getRawAxis(2), -OI.Stick.getRawAxis(0) * 0.4);
     } else {
-      RobotMap.differentialDrive.arcadeDrive(0, -OI.Stick.getRawAxis(0) * 0.4);
-      //System.out.println("*****************Z axis value is : " + OI.Stick.getRawAxis(0));
+      RobotMap.differentialDrive.arcadeDrive(0, -OI.Stick.getRawAxis(0) * 0.6);
 
     }
   
@@ -93,15 +90,17 @@ public class DriveSystem extends Subsystem {
     driveSystemRightRear.follow(driveSystemRightFront);
   }
 
-  // public void configTalonsForManual() {
-  //   driveSystemLeftFront.changeControlMode(WPI_TalonSRX.SetControlMode(kFollower).PercentvBus);
-  //}
-  public void auton(){
-    for(int q = 0; q < 100; q++){
-      leftSide.set(0.2);
-      rightSide.set(0.2);
+//   public void configTalonsForManual() {
+//     driveSystemLeftFront.changeControlMode(WPI_TalonSRX.SetControlMode(kFollower).PercentvBus);
+//   }
+
+    public void auton() {
+        for(int q = 0; q < 100; q++) {
+            leftSide.set(0.2); 
+            rightSide.set(0.2); 
+        }
+        leftSide.set(0);
+        rightSide.set(0);
     }
-    leftSide.set(0);
-    rightSide.set(0);
-  }
+
 }

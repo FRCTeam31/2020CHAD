@@ -9,7 +9,9 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+//import frc.robot.OI;
 import frc.robot.RobotMap;
 
 /**
@@ -20,6 +22,7 @@ public class ClimbingSystem extends Subsystem {
   // here. Call these from Commands.
 
   CANSparkMax climbMotor = RobotMap.climbMotor; 
+  DigitalInput input6 = RobotMap.input6;
   
   @Override
   public void initDefaultCommand() {
@@ -29,10 +32,16 @@ public class ClimbingSystem extends Subsystem {
   public ClimbingSystem() {
   }
 
-  public void upClimber(double upClimberPower) {
-  
-    climbMotor.set(upClimberPower); 
-  }
+  public void upClimber(double upClimberSpeed) {
+      //if((input6.get() == false && OI.Stick2.getRawAxis(1) < 0) || (OI.Stick2.getRawAxis(1) < 0))
+      
+      climbMotor.set(upClimberSpeed); 
+      
+    }
+
+    public void downClimber(double downClimberSpeed){
+      climbMotor.set(downClimberSpeed);
+    }
 
   public void stopClimber() {
     climbMotor.set(0); 

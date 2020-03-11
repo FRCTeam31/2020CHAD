@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
 
 /**
@@ -19,14 +20,20 @@ public class OutputSystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  CANSparkMax  outputMotor = RobotMap.outputMotor;
+  WPI_TalonSRX highMotor = RobotMap.highMotor;
+
   
-  public void outputMotorMove(){
-    outputMotor.set(.4);
+  public void outputMotorMoveIn(){
+    highMotor.set(1.0);
+  }
+
+  public void outputMotorMoveOut() {
+    highMotor.set(-1.0); 
   }
 
   public void outputMotorStop() {
-    outputMotor.set(0.0); 
+    highMotor.set(0.0); 
+     
   }
 
   public void initDefaultCommand() {

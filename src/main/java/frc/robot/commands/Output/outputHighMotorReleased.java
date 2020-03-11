@@ -10,11 +10,11 @@ package frc.robot.commands.Output;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class outputMotorPressed extends Command {
+public class outputHighMotorReleased extends Command {
 
   boolean done = false; 
 
-  public outputMotorPressed() {
+  public outputHighMotorReleased() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.im); 
@@ -29,7 +29,7 @@ public class outputMotorPressed extends Command {
   @Override
   protected void execute() {
     System.out.println("Command"); 
-    Robot.im.intakeMotorMoveOut();
+    Robot.om.outputMotorStop();
   }
 
   // Make this return true when this Command no longer needs to run execute()

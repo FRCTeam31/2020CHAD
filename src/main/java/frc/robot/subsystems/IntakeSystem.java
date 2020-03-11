@@ -12,24 +12,33 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 /**
  * Add your docs here.
  */
 public class IntakeSystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  DigitalInput input = RobotMap.input;
+//   DigitalInput input1 = RobotMap.input1;
+//   DigitalInput input2 = RobotMap.input2;
+//   DigitalInput input3 = RobotMap.input3;
+//   DigitalInput input4 = RobotMap.input4;
+//   DigitalInput input5 = RobotMap.input5;
 
   //Counter Counter = new Counter(input); 
   
-  WPI_TalonFX intakeMotor = RobotMap.intakeMotor; 
+  WPI_TalonSRX lowMotor = RobotMap.lowMotor; 
 
-  public void intakeMotorMove(){
-    intakeMotor.set(.4);
-    
+
+  public void intakeMotorMoveIn(){
+    lowMotor.set(-1.0); 
   }
+  public void intakeMotorMoveOut() {
+    lowMotor.set(1.0); 
+  }
+
   public void intakeMoterStop(){
-    intakeMotor.set(0.0);
+    lowMotor.set(0.0);
   }
 
   @Override
@@ -39,15 +48,10 @@ public class IntakeSystem extends Subsystem {
   }
 
   public void limitMotor() {
-    if(input.get() == false) {
-      System.out.println("Sensor"); 
-      intakeMotor.set(0);
-    }
-    else {
-      intakeMotor.set(0.4); 
-    }
+      lowMotor.set(-1.0);     
   }
 
   public void stopDrive() {
-  }
+    lowMotor.set(0); 
+    }
 }

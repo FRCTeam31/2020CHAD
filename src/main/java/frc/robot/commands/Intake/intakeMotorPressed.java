@@ -17,7 +17,7 @@ public class intakeMotorPressed extends Command {
   public intakeMotorPressed() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.dt); 
+    requires(Robot.im); 
   }
 
   // Called just before this Command runs the first time
@@ -25,15 +25,14 @@ public class intakeMotorPressed extends Command {
   protected void initialize() {
     // Robot.im.initializeCounter(); 
     Robot.im.limitMotor();
-    Robot.im.intakeMotorMove();
+    Robot.im.intakeMotorMoveIn();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    System.out.println("Command"); 
     Robot.im.limitMotor();
-    Robot.im.intakeMotorMove();
+    Robot.im.intakeMotorMoveIn();
     
   }
 
@@ -47,7 +46,7 @@ public class intakeMotorPressed extends Command {
   @Override
   protected void end() {
     Robot.im.limitMotor();
-    Robot.im.intakeMotorMove();
+    Robot.im.intakeMotorMoveIn();
 
   }
 

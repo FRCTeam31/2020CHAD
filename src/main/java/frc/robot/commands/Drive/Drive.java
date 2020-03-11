@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Drive extends Command {
 
   boolean done = false;
-public Object differentialDrive;
   
 
 
@@ -24,9 +23,8 @@ public Object differentialDrive;
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //System.out.println("Command");
     Robot.dt.Driving();
-    done = false;
+    done = true;
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -1,4 +1,3 @@
-  
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
@@ -8,42 +7,65 @@
 
 package frc.robot.commands.Cage;
 
-import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
+
+import com.revrobotics.CANSparkMax;
+
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.command.Command;
 
 public class setCageMedium extends Command {
-
-  boolean done = false; 
+  boolean done = false;
 
   public setCageMedium() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.cs); 
+      requires(Robot.cls);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    System.out.println("High"); 
-    Robot.cs.setMedium();
-    done = true; 
+    // Robot.cls.upClimber(0.2);
+    // Robot.cls.downClimber(0.2);
+    // System.out.println("ClimbUp");
+    if(OI.Stick2.getY() < 0)
+    {
+      Robot.cs.downMedium(OI.Stick2.getY());
+    }
+    else {
+      Robot.cs.UpMedium(OI.Stick2.getY()); 
+    }
+    ////////////////////////////////////////////////////////////////////////
+    // if(OI.Stick2.getY() < 0.1 && OI.Stick2.getY() > -0.1 || input6.get() == false) {
+    //   Robot.cls.stopClimber();
+    // }
+    // else if(OI.Stick2.getY() > 0.1 && input6.get() == false) {
+    //   Robot.cls.upClimber(OI.Stick2.getY() * 0.5); 
+    // }
+    // else {
+    //   Robot.cls.upClimber(OI.Stick2.getY() * 0.5);
+    // }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return done;
+    return false; 
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.cs.stopMotor();
+    //Robot.cls.stopClimber();
   }
 
   // Called when another command which requires one or more of the same
@@ -51,4 +73,6 @@ public class setCageMedium extends Command {
   @Override
   protected void interrupted() {
   }
+
+
 }

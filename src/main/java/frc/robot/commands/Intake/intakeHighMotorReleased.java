@@ -5,19 +5,15 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Output;
+package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class outputMotorPressed extends Command {
-
-  boolean done = false; 
-
-  public outputMotorPressed() {
+public class intakeHighMotorReleased extends Command {
+  public intakeHighMotorReleased() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.im); 
   }
 
   // Called just before this Command runs the first time
@@ -28,14 +24,13 @@ public class outputMotorPressed extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    System.out.println("Command"); 
-    Robot.im.intakeMotorMoveOut();
+    Robot.om.outputMotorStop();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return done;
+    return false;
   }
 
   // Called once after isFinished returns true
